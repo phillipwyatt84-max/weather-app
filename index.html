@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkyCast Weather App</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="weather-app">
+      <header class="app-header">
+        <a href="#" class="logo">SkyCast</a>
+
+        <p class="header-label">YOUR DAILY WEATHER</p>
+      </header>
+
+      <section class="search-section">
+        <h1>Discover your <span>weather.</span></h1>
+
+        <p class="subtitle">Get your latest weather updates for your city.</p>
+
+        <form class="search-form">
+          <label for="city-input">Enter your city name</label>
+          <input
+            type="text"
+            id="city-input"
+            placeholder="Enter city name..."
+            autocomplete="off"
+            required
+          />
+          <button type="submit" id="search-button">Search</button>
+        </form>
+
+        <p class="message" id="message"></p>
+      </section>
+
+      <!-- current weather display -->
+      <section class="current-weather" id="current-weather">
+        <div class="location-info">
+          <p class="weather-label">CURRENT WEATHER</p>
+
+          <h2 id="city-name">Lagos, Nigeria</h2>
+
+          <p class="date" id="current-date">Thursday, October 15</p>
+        </div>
+
+        <!-- main temperature and weather logo/icon  -->
+        <div class="temperature-section">
+          <div
+            class="weather-icon"
+            id="weather-icon"
+            aria-label="Sunny weather"
+          >
+            ☀️
+          </div>
+
+          <div class="temperature-info">
+            <p class="temperature">
+              <span id="temperature">30</span><span>°C</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- More weather information -->
+        <div class="weather-details">
+          <article class="detail-card">
+            <span class="detail-icon">💧</span>
+            <p class="detail-label">Humidity</p>
+            <p class="detail-value">
+              <span id="humidity">72</span><span>%</span>
+            </p>
+          </article>
+
+          <article class="detail-card">
+            <span class="detail-icon">💨</span>
+            <p class="detail-label">Wind Speed</p>
+            <p class="detail-value">
+              <span id="wind-speed">10</span><span> km/h</span>
+            </p>
+          </article>
+
+          <article class="detail-card">
+            <span class="detail-icon">🌡️</span>
+            <p class="detail-label">Pressure</p>
+            <p class="detail-value">
+              <span id="pressure">1000</span><span> hPa</span>
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 5-day forecast section  -->
+      <section class="forecast-section">
+        <div class="section-heading">
+          <div>
+            <p class="weather-label">PLAN AHEAD</p>
+            <h2>5-Day Forecast</h2>
+          </div>
+
+          <span class="forecast-note">Next 5 days</span>
+        </div>
+
+        <!-- Javascript should send forecast unfo here  -->
+        <div class="forecast-list" id="forecast-list">
+          <!-- card 1  -->
+          <article class="forecast-card">
+            <p class="forecast-day">Fri</p>
+            <span class="forecast-icon">🌤️</span>
+            <p class="forecast-temp">31°</p>
+            <p class="forecast-condition">Partly Cloudy</p>
+          </article>
+
+          <!-- card 2  -->
+          <article class="forecast-card">
+            <p class="forecast-day">Sat</p>
+            <span class="forecast-icon">☀️</span>
+            <p class="forecast-temp">32°</p>
+            <p class="forecast-condition">Sunny</p>
+          </article>
+
+          <!-- card 3  -->
+          <article class="forecast-card">
+            <p class="forecast-day">Sun</p>
+            <span class="forecast-icon">🌧️</span>
+            <p class="forecast-temp">28°</p>
+            <p class="forecast-condition">Rainy</p>
+          </article>
+
+          <!-- card 4  -->
+          <article class="forecast-card">
+            <p class="forecast-day">Mon</p>
+            <span class="forecast-icon">⛅</span>
+            <p class="forecast-temp">27°</p>
+            <p class="forecast-condition">Cloudy</p>
+          </article>
+
+          <!-- card 5  -->
+          <article class="forecast-card">
+            <p class="forecast-day">Tue</p>
+            <span class="forecast-icon">🌦️</span>
+            <p class="forecast-temp">32°</p>
+            <p class="forecast-condition">Light Showers</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- footer section  -->
+      <footer class="app-footer">
+        <p>SkyCast Weather App</p>
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,653 @@
+/* 1. RESET AND GLOBAL STYLES */
+
+/* Remove default browser spacing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Enable smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Main page styling */
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    background: linear-gradient(135deg,
+            #080c24,
+            #101b3d,
+            #171438);
+    padding: 30px 16px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Create a soft glowing background */
+body::before {
+    content: "";
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: #3569ff;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.18;
+    top: -150px;
+    left: -100px;
+    pointer-events: none;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    background: #a855f7;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.15;
+    bottom: -150px;
+    right: -100px;
+    pointer-events: none;
+}
+
+
+/* 2. MAIN APP CONTAINER */
+
+/* Keep the application centered */
+.weather-app {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+
+/* 3. HEADER */
+
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 65px;
+    animation: slideDown 0.8s ease both;
+}
+
+/* App logo */
+.logo {
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.logo span {
+    color: #60a5fa;
+}
+
+.header-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #9caed1;
+    font-weight: 600;
+}
+
+
+/* 4. SEARCH SECTION */
+
+.search-section {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeUp 0.9s ease both;
+}
+
+.search-section h1 {
+    font-size: clamp(32px, 5vw, 54px);
+    line-height: 1.15;
+    margin-bottom: 16px;
+    letter-spacing: -2px;
+}
+
+.search-section h1 span {
+    background: linear-gradient(90deg,
+            #60a5fa,
+            #c084fc);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.subtitle {
+    color: #a8b4d1;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Search form layout */
+.search-form {
+    display: flex;
+    gap: 10px;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 7px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    backdrop-filter: blur(15px);
+    transition: border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* Highlight the search form when focused */
+.search-form:focus-within {
+    border-color: #60a5fa;
+    box-shadow: 0 0 25px rgba(96, 165, 250, 0.15);
+}
+
+/* City input */
+.search-form input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
+    padding: 14px;
+    font-size: 14px;
+}
+
+/* Placeholder text */
+.search-form input::placeholder {
+    color: #8c9bbd;
+}
+
+/* Search button */
+.search-form button {
+    border: none;
+    border-radius: 11px;
+    padding: 14px 23px;
+    background: linear-gradient(135deg, #3b82f6, #6366f1);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Button hover animation */
+.search-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(59, 130, 246, 0.35);
+}
+
+.search-form button:active {
+    transform: scale(0.97);
+}
+
+/* Feedback messages from JavaScript */
+.message {
+    min-height: 20px;
+    margin-top: 14px;
+    color: #fca5a5;
+    font-size: 13px;
+}
+
+
+/* 5. CURRENT WEATHER CARD */
+
+.current-weather {
+    padding: 35px;
+    border-radius: 28px;
+    background: linear-gradient(135deg,
+            rgba(65, 105, 225, 0.19),
+            rgba(139, 92, 246, 0.12));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+    animation: fadeUp 1s ease both;
+}
+
+/* Small section labels */
+.weather-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #8ebaff;
+    margin-bottom: 12px;
+}
+
+/* City name */
+.location-info h2 {
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+/* Date text */
+.date {
+    color: #a8b4d1;
+    font-size: 13px;
+}
+
+/* Temperature and icon arrangement */
+.temperature-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 25px 0 35px;
+}
+
+/* Large weather emoji */
+.weather-icon {
+    font-size: clamp(80px, 12vw, 125px);
+    filter: drop-shadow(0 0 25px rgba(255, 205, 90, 0.25));
+    animation: float 4s ease-in-out infinite;
+    cursor: default;
+}
+
+/* Temperature display */
+.temperature {
+    font-size: clamp(55px, 9vw, 85px);
+    font-weight: 300;
+    letter-spacing: -4px;
+}
+
+.temperature span:last-child {
+    font-size: 35px;
+    vertical-align: top;
+    letter-spacing: 0;
+}
+
+/* Weather condition */
+.weather-description {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+/* Feels-like temperature */
+.feels-like {
+    font-size: 13px;
+    color: #a8b4d1;
+    margin-top: 9px;
+}
+
+
+/* 6. WEATHER DETAIL CARDS */
+
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* Individual detail card */
+.detail-card {
+    padding: 20px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
+}
+
+/* Lift cards when the mouse moves over them */
+.detail-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(96, 165, 250, 0.35);
+}
+
+.detail-icon {
+    font-size: 23px;
+}
+
+.detail-label {
+    color: #a8b4d1;
+    font-size: 12px;
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+.detail-value {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+
+/* 7. FORECAST SECTION */
+
+.forecast-section {
+    margin-top: 55px;
+    animation: fadeUp 1.2s ease both;
+}
+
+/* Forecast heading */
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.section-heading h2 {
+    font-size: 23px;
+}
+
+.forecast-note {
+    color: #a8b4d1;
+    font-size: 12px;
+}
+
+/* Forecast cards layout */
+.forecast-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+}
+
+/* Individual forecast card */
+.forecast-card {
+    text-align: center;
+    padding: 22px 10px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.3s ease,
+        background 0.3s ease;
+    animation: fadeUp 0.7s ease both;
+}
+
+/* Stagger the entrance animation */
+.forecast-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.forecast-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.forecast-card:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.forecast-card:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+/* Hover effect */
+.forecast-card:hover {
+    transform: translateY(-7px);
+    background: rgba(96, 165, 250, 0.12);
+}
+
+/* Day name */
+.forecast-day {
+    color: #a8b4d1;
+    font-size: 12px;
+    margin-bottom: 17px;
+}
+
+/* Forecast weather icon */
+.forecast-icon {
+    display: inline-block;
+    font-size: 30px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.forecast-card:hover .forecast-icon {
+    transform: scale(1.2) rotate(-5deg);
+}
+
+/* Forecast temperature */
+.forecast-temp {
+    font-size: 21px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+/* Forecast description */
+.forecast-condition {
+    color: #a8b4d1;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+
+/* 8. FOOTER */
+
+.app-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 55px;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: #8795b5;
+    font-size: 11px;
+}
+
+
+/* 9. ANIMATIONS */
+
+/* Move elements down into view */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade elements upward into view */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Make the weather icon float */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+
+/* 10. ACCESSIBILITY */
+
+/* Hide labels visually without removing them
+   from screen readers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* 11. TABLET RESPONSIVENESS */
+
+@media (max-width: 700px) {
+    body {
+        padding: 22px 14px;
+    }
+
+    .app-header {
+        margin-bottom: 45px;
+    }
+
+    .current-weather {
+        padding: 25px;
+    }
+
+    .temperature-section {
+        gap: 20px;
+    }
+
+    .weather-details {
+        gap: 10px;
+    }
+
+    .detail-card {
+        padding: 15px 10px;
+    }
+
+    .forecast-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .forecast-card:nth-child(4),
+    .forecast-card:nth-child(5) {
+        margin-top: 5px;
+    }
+}
+
+
+/* 12. MOBILE RESPONSIVENESS */
+
+@media (max-width: 450px) {
+    .header-label {
+        font-size: 8px;
+        letter-spacing: 1.5px;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .search-section h1 {
+        letter-spacing: -1px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+
+    .search-form input {
+        padding: 12px 8px;
+        font-size: 12px;
+    }
+
+    .search-form button {
+        padding: 12px 15px;
+        font-size: 12px;
+    }
+
+    .current-weather {
+        padding: 20px 15px;
+        border-radius: 22px;
+    }
+
+    .location-info h2 {
+        font-size: 22px;
+    }
+
+    .temperature-section {
+        gap: 12px;
+        padding: 30px 0;
+    }
+
+    .weather-icon {
+        font-size: 70px;
+    }
+
+    .temperature {
+        font-size: 55px;
+    }
+
+    .temperature span:last-child {
+        font-size: 25px;
+    }
+
+    .weather-description {
+        font-size: 15px;
+    }
+
+    .feels-like {
+        font-size: 11px;
+    }
+
+    .weather-details {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px;
+    }
+
+    .detail-label {
+        flex: 1;
+        margin: 0;
+    }
+
+    .detail-value {
+        font-size: 17px;
+    }
+
+    .forecast-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .forecast-card {
+        padding: 20px 8px;
+    }
+
+    .section-heading h2 {
+        font-size: 20px;
+    }
+
+    .app-footer {
+        flex-direction: column;
+        text-align: center;
+        line-height: 1.6;
+    }
+}
